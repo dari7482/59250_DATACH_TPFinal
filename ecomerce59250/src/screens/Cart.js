@@ -1,6 +1,7 @@
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 import cart from '../data/cart.json'
 import CartItem from '../components/CartItem'
+import Counter from '../components/Counter'
 import React from 'react'
 import { colors } from '../global/color'
 
@@ -10,6 +11,7 @@ const Cart = () => {
 
     return (
         <View style={styles.containerTotal}>
+            <Counter />
             <FlatList
                 data={cart.items}
                 KeyExtractor={item => item.id}
