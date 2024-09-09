@@ -5,7 +5,7 @@ import Category from './Category.js'
 
 console.log(categories)
 
-export default function Categories({ handleCategorySelected }) {
+export default function Categories({ navigation }) {
   console.log(typeof (categories))
 
   return (
@@ -16,7 +16,7 @@ export default function Categories({ handleCategorySelected }) {
         renderItem={({ item }) => { // Destructuramos el objeto para obtener el item directamente o item.item
           console.log('11', item)
           return (
-            <Category item={item} handleCategorySelected={handleCategorySelected} />
+            <Category navigation={navigation} item={item} />
           )
         }}
 

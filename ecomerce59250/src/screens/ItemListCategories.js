@@ -6,7 +6,10 @@ import productos from '../data/productos.json'
 import ProductItem from '../components/ProductItem'
 
 
-export default function ItemListCategories({ category, handleReturnSelect, handleProductDetailId }) {
+export default function ItemListCategories({ route }) {
+
+    const { category } = route.params
+    console.log(category)
     const [categoryFiltred, setCategoryFiltred] = useState([])
 
 
@@ -27,15 +30,15 @@ export default function ItemListCategories({ category, handleReturnSelect, handl
     return (
         <>
             <View>
-                <Header title={category} handleReturnSelect={handleReturnSelect} />
+                {/*<Header title={category}/>}*/}
                 <Search onSearch={onSearch} />
                 <FlatList
                     data={categoryFiltred}
                     keyExtractor={item => item.id}
-                    renderItem={({ item }) => <ProductItem item={item} handleProductDetailId={handleProductDetailId} />}
+                    renderItem={({ item }) => <ProductItem item={item} />}
                 />
             </View>
-            <Pressable onPress={() => handleReturnSelect("")}>
+            <Pressable onPress="">
                 <View>
                     <Text>HOME</Text>
 

@@ -1,13 +1,16 @@
 import { StyleSheet, Text, View, Pressable, StatusBar, Platform } from 'react-native'
 import React from 'react'
 import { colors } from '../global/color'
+import { useNavigation } from '@react-navigation/native'
 
-export default function Header({ title, handleReturnSelect }) {
-    console.log(handleReturnSelect)
+export default function Header({ title }) {
+    console.log('6', title)
+    const Navigation = useNavigation()
+
     return (
         <View style={styles.container}>
-            {handleReturnSelect ? (
-                <Pressable onPress={() => handleReturnSelect("")}>
+            {title !== 'Bienvenido' ? (
+                <Pressable onPress={() => Navigation.goBack()} >
 
                     <Text>{"<"}</Text>
 

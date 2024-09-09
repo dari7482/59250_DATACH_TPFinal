@@ -6,13 +6,14 @@ import { colors } from '../global/color'
 
 
 
-export default function ItemDetail({ id }) {
+export default function ItemDetail({ route }) {
+
+    const { id } = route.params
     return (
         <>
-
             <View style={styles.container}>
 
-                <Header title="Detalle" />
+                {/*<Header title="Detalle" />*/}
                 <View>
                     <View style={styles.containerDetails}>
                         <Image

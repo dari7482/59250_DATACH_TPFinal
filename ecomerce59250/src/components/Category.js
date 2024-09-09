@@ -3,15 +3,16 @@ import React from 'react'
 import ShadowWrapper from './ShadowWrapper'
 import { colors } from '../global/color'
 
-export default function Category({ item, handleCategorySelected }) {
+export default function Category({ item, navigation }) {
+    //const navigation =useNavigation() ahoorra pasa el navigation como props , el hook 
     return (
-        <Pressable onPress={() => handleCategorySelected(item)}>
+        <Pressable onPress={() => navigation.navigate("Products", { category: item })}>
             <ShadowWrapper style={styles.container}>
                 <Text style={styles.text}>
                     {item}
                 </Text>
             </ShadowWrapper>
-        </Pressable>
+        </ Pressable>
     )
 }
 
