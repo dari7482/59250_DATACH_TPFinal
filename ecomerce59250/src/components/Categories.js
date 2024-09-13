@@ -1,12 +1,14 @@
 import { View, Text, FlatList } from 'react-native'
 import React from 'react'
-import categories from '../data/categories.json'
+//import categories from '../data/categories.json'
 import Category from './Category.js'
+import { useSelector } from 'react-redux'
 
-console.log(categories)
+
 
 export default function Categories({ navigation }) {
-  console.log(typeof (categories))
+  const categories = useSelector(state => state.shop.categories)
+  console.log(categories)
 
   return (
     <View>

@@ -1,8 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
+import categories from '../../data/categories.json'
+import productos from '../../data/productos.json'
+
+console.log('redux', categories)
 
 const initialState = {
-    cateogries: [],
-    productsFilteredByCategoried: [],
+    categories: categories,
+    products: productos,
     categorySelected: ""
 }
 

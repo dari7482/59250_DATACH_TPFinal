@@ -2,11 +2,13 @@ import { View, Text, FlatList, Pressable } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Search from '../components/Search'
-import productos from '../data/productos.json'
+//import productos from '../data/productos.json'
 import ProductItem from '../components/ProductItem'
+import { useSelector } from 'react-redux'
 
 
 export default function ItemListCategories({ route }) {
+    const productos = useSelector(state => state.shop.products)
 
     const { category } = route.params
     console.log(category)
