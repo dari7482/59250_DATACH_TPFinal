@@ -9,9 +9,10 @@ import { useState } from 'react';
 import { useFonts } from 'expo-font'
 import { fonts } from './src/global/fonts'
 import Navigator from './src/navigation/Navigatorr';
+
 import { Provider } from 'react-redux';
 import { store } from './src/app/store';
-
+import Login from './src/screens/Login';
 export default function App() {
   const [fontLoaded] = useFonts(fonts)
 
@@ -27,7 +28,8 @@ export default function App() {
   return (
     <>
       <Provider store={store}>
-        <Navigator />
+        {/*<Navigator />*/}
+        <Login />
       </Provider>
       <StatusBar style="light" backgroundColor={colors.green1} />
     </>

@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 const ProductItem = ({ item }) => {
     const { width, height } = useWindowDimensions()
     const navigation = useNavigation()
-    console.log('6', item.thumbnail)
+
     return (
         <Pressable style={styles.container} onPress={() => navigation.navigate("Detail", { id: item.id })}>
             <Text style={[styles.title, width < 300 ? styles.titleMin : styles.titleMax]}>{item.title}</Text>

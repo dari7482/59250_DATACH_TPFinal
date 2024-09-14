@@ -4,7 +4,7 @@ import { colors } from '../global/color'
 import { useNavigation } from '@react-navigation/native'
 
 export default function Header({ title }) {
-    console.log('6', title)
+
     const Navigation = useNavigation()
 
     return (

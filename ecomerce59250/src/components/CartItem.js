@@ -5,7 +5,7 @@ import Entypo from '@expo/vector-icons/Entypo';
 
 
 const CartItem = ({ item }) => {
-    console.log(item)
+
     return (
         <View style={styles.container}>
             <View style={styles.containerText}>

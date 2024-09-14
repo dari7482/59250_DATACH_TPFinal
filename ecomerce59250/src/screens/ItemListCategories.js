@@ -5,34 +5,42 @@ import Search from '../components/Search'
 //import productos from '../data/productos.json'
 import ProductItem from '../components/ProductItem'
 import { useSelector } from 'react-redux'
+import { useGetProductosQuery } from '../service/shop'
 
 
 export default function ItemListCategories({ route }) {
-    const productos = useSelector(state => state.shop.products)
-
+    //const productos = useSelector(state => state.shop.products)
     const { category } = route.params
-    console.log(category)
+    const { data: productos, isLoading, isSuccess } = useGetProductosQuery(category)
     const [categoryFiltred, setCategoryFiltred] = useState([])
 
 
     useEffect(() => {
-        setCategoryFiltred(productos.filter(producto => producto.category === category))
 
-    }, [category])
+        if (isSuccess) {
+
+            setCategoryFiltred(productos)
+            //setCategoryFiltred(productos.filter(producto => producto.category === category))
+        }
+
+    }, [category, isSuccess])
 
     const onSearch = (input) => {
-        console.log(input)
-        console.log(categoryFiltred)
-        if (!input) {
-            setCategoryFiltred(productos.filter(producto => producto.category === category))
-        } else {
+
+        if (input) {
             setCategoryFiltred(categoryFiltred.filter(producto => producto.title.includes(input)))
+        } else {
+            setCategoryFiltred(productos)
+            //setCategoryFiltred(categoryFiltred.filter(producto => producto.title.includes(input)))
         }
     }
+
+    if (isLoading) return <Text>Loading</Text>
     return (
         <>
             <View>
                 {/*<Header title={category}/>}*/}
+
                 <Search onSearch={onSearch} />
                 <FlatList
                     data={categoryFiltred}

@@ -1,14 +1,30 @@
 import { View, Text, FlatList, Pressable, StyleSheet, Image } from 'react-native'
 import React from 'react'
-import Header from '../components/Header'
-import productos from '../data/productos.json'
+//import productos from '../data/productos.json'
 import { colors } from '../global/color'
+import { useDispatch } from 'react-redux'
+import { addItemCart } from '../features/cart/cartSlice'
+import { useNavigation } from '@react-navigation/native'
+import { useGetProductoQuery } from '../service/shop'
 
 
 
 export default function ItemDetail({ route }) {
 
     const { id } = route.params
+    const { data: producto, isLoading } = useGetProductoQuery(id)
+
+    const navigation = useNavigation()
+    const dispatch = useDispatch()
+    const handleAddItemCart = () => {
+        dispatch(addItemCart({ ...producto, quantity: 1 }))
+        navigation.navigate("CartStack")
+
+
+    }
+
+    if (isLoading) return <View><Text>Loading</Text></View>
+
     return (
         <>
             <View style={styles.container}>
@@ -19,16 +35,19 @@ export default function ItemDetail({ route }) {
                         <Image
                             style={styles.image}
                             resizeMode='container'
-                            souce={{ uri: productos[id].thumbnail }}
+                            source={{ uri: producto.thumbnail }}
                         />
                         <View style={styles.containerText}>
-                            <Text style={styles.title}>{productos[id].title}</Text>
-                            <Text style={styles.price}>{productos[id].price}</Text>
-                            <Text style={styles.description}>{productos[id].description}</Text>
+                            <Text style={styles.title}>{producto.title}</Text>
+                            <Text style={styles.price}>{producto.price}</Text>
+                            <Text style={styles.description}>{producto.description}</Text>
                         </View>
                     </View>
                 </View>
-                <Pressable styles={styles.button}>
+                <Pressable styles={styles.button} onPress={
+
+                    handleAddItemCart
+                }>
                     <Text style={styles.button}>
                         Comprar
                     </Text>

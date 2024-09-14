@@ -34,7 +34,7 @@ const Counter = () => {
     }
 
     const incrementByAmount = () => {
-        console.log(input)
+
         setCount(count + input)
         setInput(0)
 

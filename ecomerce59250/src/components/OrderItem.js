@@ -5,12 +5,12 @@ import AntDesgin from '@expo/vector-icons/AntDesign';
 
 
 const OrderItem = ({ item }) => {
-    console.log(item)
+
     return (
         <View style={styles.container}>
             <View style={styles.containerText}>
-                <Text>{new Date(item.createdAt).toLocaleDateString()}</Text>
-                <Text>{item.Total}$</Text>
+                <Text>{item.createdAt}</Text>
+                <Text>{item.total}$</Text>
 
             </View>
             <AntDesgin name="search1" size={48} color="black" />
