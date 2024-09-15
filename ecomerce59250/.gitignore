@@ -1,7 +1,9 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
 # dependencies
+/src/firebase/database.js
 node_modules/
+
 
 # Expo
 .expo/
