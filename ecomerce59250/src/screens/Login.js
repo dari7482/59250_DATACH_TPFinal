@@ -6,7 +6,8 @@ import SubmitButton from '../components/SubmitButton'
 import { useLoginMutation } from '../service/auth'
 import { setUser } from '../features/auth/authSlice'
 import { useDispatch } from 'react-redux'
-//import { loginSchema } from '../validations/loginSchema'
+
+import { loginSchema } from '../validations/loginSchema'
 //import { deleteSession, insertSession } from '../db'
 
 
@@ -29,14 +30,14 @@ const Login = ({ navigation }) => {
 
 
     }, [isSuccess, isError])
-    const onSubmit = async () => {
+    /*const onSubmit = async () => {
         console.log(email, password)
         const { data } = await triggerLogin({ email, password })
         console.log(data.email, '35')
-        dispatch(setUser({ email: data.email, idToken: data.idToken }))
+        dispatch(setUser({ email: data.email, idToken: data.idToken, localId: data.localId }))
 
 
-    }
+    }*/
     /*useEffect(() => {
         if (isError) {
             setErrorEmail("email o contraseña invalida")
@@ -45,12 +46,12 @@ const Login = ({ navigation }) => {
     }, [isError])*/
 
 
-    /*const onSubmit = async () => {
+    const onSubmit = async () => {
         try {
             loginSchema.validateSync({ email, password })
             const { data } = await triggerLogin({ email, password })
-            deleteSession()
-            insertSession(data)
+            //deleteSession()
+            //insertSession(data)
             dispatch(setUser({
                 email: data.email,
                 idToken: data.idToken,
@@ -72,7 +73,7 @@ const Login = ({ navigation }) => {
             }
 
         }
-    }*/
+    }
 
     return (
         <View style={styles.main}>

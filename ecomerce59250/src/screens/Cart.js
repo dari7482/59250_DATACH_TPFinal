@@ -9,8 +9,10 @@ import { usePostOrderMutation } from '../service/shop'
 import { clearCart } from '../features/cart/cartSlice'
 import { useNavigation } from '@react-navigation/native'
 
+
 const Cart = ({ navigation }) => {
     const cart = useSelector(state => state.cart)
+    const locaId = useSelector(state => state.auth.localId)
     const [trigerrPostOrder] = usePostOrderMutation()
     const dispatch = useDispatch()
 
@@ -23,7 +25,7 @@ const Cart = ({ navigation }) => {
             createdAt
         }
 
-        trigerrPostOrder({ userId: "1", order: order })
+        trigerrPostOrder({ userId: locaId, order: order })
         dispatch(clearCart())
         // navigation.navigate("OrderStack")
 

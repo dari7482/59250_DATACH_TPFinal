@@ -2,11 +2,14 @@ import { View, Text, FlatList } from 'react-native'
 //import order from '../data/Orders.json'
 import React, { useEffect } from 'react'
 import OrderItem from '../components/OrderItem'
-import { useGetOrdersQuery } from '../service/shop'
+import { useSelector } from 'react-redux'
+import { useGetOrdersByUserQuery } from '../service/shop'
 
 const Order = () => {
     //const { id } = route.parmas
-    const { data: order, isLoading, isSuccess } = useGetOrdersQuery("1")
+    const localId = useSelector(state => state.auth.localId)
+
+    const { data: order, isLoading, isSuccess } = useGetOrdersByUserQuery(localId)
 
 
 

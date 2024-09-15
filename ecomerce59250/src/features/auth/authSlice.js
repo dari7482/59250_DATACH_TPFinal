@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     email: "",
     idToken: "",
-    //localId: ""
+    localId: ""
 }
 
 console.log('9', initialState.email)
@@ -16,12 +16,12 @@ export const authSlice = createSlice({
             console.log('200', state)
             state.email = action.payload.email
             state.idToken = action.payload.idToken
-            //  state.localId = action.payload.localId
+            state.localId = action.payload.localId
         },
         clearUser: (state) => {
             state.email = ""
             state.idToken = ""
-            //state.localId = ""
+            state.localId = ""
         }
     }
 })

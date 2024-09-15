@@ -6,7 +6,7 @@ import SubmitButton from '../components/SubmitButton'
 import { useRegisterMutation } from '../service/auth'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../features/auth/authSlice'
-//import { registerSchema } from '../validations/registerSchema'
+import { registerSchema } from '../validations/registerSchema'
 //import { deleteSession, insertSession } from '../db'
 
 const Register = ({ navigation }) => {
@@ -25,48 +25,49 @@ const Register = ({ navigation }) => {
         }
     }, [isError])
 
+    /* const onSubmit = async () => {
+         console.log(email, password)
+         const { data } = await triggerRegister({ email, password })
+         dispatch(setUser({ email: data.email, idToken: data.idToken, localId: data.localId }))
+ 
+ 
+ 
+     }*/
+
+
+
     const onSubmit = async () => {
-        console.log(email, password)
-        const { data } = await triggerRegister({ email, password })
-        dispatch(setUser({ email: data.email, idToken: data.idToken }))
+        try {
+            registerSchema.validateSync({ email, password, confirmPassword })
+            const { data } = await triggerRegister({ email, password })
+            //   deleteSession()
+            //  insertSession(data)
+            dispatch(setUser({
+                email: data.email,
+                idToken: data.idToken,
+                localId: data.localId
+            }))
+        } catch (error) {
+            switch (error.path) {
+                case "email":
+                    setErrorEmail(error.message)
+                    setErrorPassword("")
+                    setErrorConfirmPassword("")
+                    break
+                case "password":
+                    setErrorEmail("")
+                    setErrorPassword(error.message)
+                    setErrorConfirmPassword("")
+                    break
+                case "confirmPassword":
+                    setErrorEmail("")
+                    setErrorPassword("")
+                    setErrorConfirmPassword(error.message)
+                    break
 
-
-
-    }
-
-
-
-    /*    const onSubmit = async () => {
-          try {
-            registerSchema.validateSync({email,password,confirmPassword})
-            const {data} = await triggerRegister({email,password})
-            deleteSession()
-            insertSession(data)
-            dispatch(setUser({email:data.email,
-             idToken:data.idToken,
-             localId:data.localId
-           }))
-          } catch (error) {
-            switch(error.path){
-              case "email":
-                setErrorEmail(error.message)
-                setErrorPassword("")
-                setErrorConfirmPassword("")
-                break
-              case "password":
-                setErrorEmail("")
-                setErrorPassword(error.message)
-                setErrorConfirmPassword("")
-                break
-              case "confirmPassword":
-                setErrorEmail("")
-                setErrorPassword("")
-                setErrorConfirmPassword(error.message)
-                break
-                
             }
-          }
-        }*/
+        }
+    }
 
     return (
         <View style={styles.main}>

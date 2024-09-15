@@ -7,6 +7,7 @@ import { URL_FIREBASE } from '../firebase/database'
 export const shopApi = createApi({
     reducerPath: 'shopApi',
     baseQuery: fetchBaseQuery({ baseUrl: URL_FIREBASE }),
+    tagTypes: ["order"],
     endpoints: (builder) => ({
         getCategories: builder.query({
             query: () => "/categories.json",
@@ -35,21 +36,21 @@ export const shopApi = createApi({
             })
 
         }),
-        getOrders: builder.query({
-            query: (userId) => `/orders/${userId}.json`,
+        getOrdersByUser: builder.query({
+            query: (localId) => `/orders/${localId}.json`,
             transformResponse: (response) => {
-
-                const data = Object.entries(response).map((item) => ({ id: item[0], ...item[1] }))
-
+                if (!response) return []
+                const data = Object.entries(response).map(item => ({ id: item[0], ...item[1] }))
                 return data
-            }
-
-
-
-        })
+            },
+            providesTags: ["order"]
+        }),
+        getOrderByUser: builder.query({
+            query: ({ localId, orderId }) => `/orders/${localId}/${orderId}.json`
+        }),
     }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetCategoriesQuery, useGetProductosQuery, useGetProductoQuery, usePostOrderMutation, useGetOrdersQuery } = shopApi
+export const { useGetCategoriesQuery, useGetProductosQuery, useGetProductoQuery, usePostOrderMutation, useGetOrdersByUserQuery } = shopApi
