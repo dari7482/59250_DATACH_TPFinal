@@ -8,11 +8,13 @@ import { colors } from './src/global/color';
 import { useState } from 'react';
 import { useFonts } from 'expo-font'
 import { fonts } from './src/global/fonts'
-import Navigator from './src/navigation/Navigatorr';
+import MainNavigator from './src/navigation/MainNavigatorr';
+import AuthStack from './src/navigation/AuthStack';
 
 import { Provider } from 'react-redux';
 import { store } from './src/app/store';
 import Login from './src/screens/Login';
+import Register from './src/screens/Register';
 export default function App() {
   const [fontLoaded] = useFonts(fonts)
 
@@ -29,7 +31,7 @@ export default function App() {
     <>
       <Provider store={store}>
         {/*<Navigator />*/}
-        <Login />
+        <MainNavigator />
       </Provider>
       <StatusBar style="light" backgroundColor={colors.green1} />
     </>
